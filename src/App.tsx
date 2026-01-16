@@ -97,8 +97,8 @@ export default function App() {
                         className="flex items-center gap-2 cursor-pointer group"
                         onClick={reset}
                     >
-                        <div className="bg-orange-500 text-white p-2 rounded-xl group-hover:rotate-12 transition-transform duration-300">
-                            <Utensils className="h-5 w-5" />
+                        <div className="h-10 w-10 relative group-hover:scale-110 transition-transform duration-300">
+                            <img src="/pratik_logo.png" alt="FlavorMatch AI Logo" className="h-full w-full object-contain rounded-lg" />
                         </div>
                         <h1 className="text-xl font-bold tracking-tight">
                             FlavorMatch <span className="text-orange-500">AI</span>
