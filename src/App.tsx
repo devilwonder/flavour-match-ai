@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Recipe } from './types';
 import { geminiService } from './services/gemini';
 import { RecipeCard } from './components/RecipeCard';
+import { RecipeModal } from './components/RecipeModal';
 import {
     Utensils,
     Search,
@@ -28,6 +29,7 @@ export default function App() {
     const [selectedDietary, setSelectedDietary] = useState<Set<string>>(new Set());
 
     const [recommendations, setRecommendations] = useState<Recipe[]>([]);
+    const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [hasSearched, setHasSearched] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -284,13 +286,25 @@ export default function App() {
                                 ))
                             ) : (
                                 recommendations.map((recipe, idx) => (
-                                    <RecipeCard key={idx} recipe={recipe} />
+                                    <RecipeCard
+                                        key={idx}
+                                        recipe={recipe}
+                                        onClick={() => setSelectedRecipe(recipe)}
+                                    />
                                 ))
                             )}
                         </div>
                     </div>
                 )}
             </main>
+
+            {/* Detail Modal */}
+            {selectedRecipe && (
+                <RecipeModal
+                    recipe={selectedRecipe}
+                    onClose={() => setSelectedRecipe(null)}
+                />
+            )}
         </div>
     );
 }

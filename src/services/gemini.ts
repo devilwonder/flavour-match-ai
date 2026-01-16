@@ -14,7 +14,7 @@ export class GeminiService {
         ingredients: string,
         mood: string
     ): Promise<Recipe[]> {
-        const model = 'gemini-3.0-alpha'; // Switched to experimental 3.0 preview
+        const model = 'gemini-3-flash-preview'; // Using the exact model requested: gemini-3-flash-preview
 
         let prompt = `Recommend 3 distinct and delicious meals based on the following preferences:\n`;
         if (dietary.length) prompt += `- Dietary Restrictions: ${dietary.join(', ')}\n`;
@@ -22,7 +22,7 @@ export class GeminiService {
         if (ingredients) prompt += `- Ingredients on hand: ${ingredients}\n`;
         if (mood) prompt += `- Current Mood/Craving: ${mood}\n`;
 
-        prompt += `\nMake the descriptions appetizing. Provide realistic cooking times and calorie estimates.`;
+        prompt += `\nMake the descriptions appetizing. Provide realistic cooking times and calorie estimates. For each recipe, provide a detailed step-by-step list of "instructions" for preparing the dish.`;
 
         const schema = {
             type: Type.ARRAY,
@@ -38,9 +38,13 @@ export class GeminiService {
                         type: Type.ARRAY,
                         items: { type: Type.STRING }
                     },
-                    tips: { type: Type.STRING }
+                    tips: { type: Type.STRING },
+                    instructions: {
+                        type: Type.ARRAY,
+                        items: { type: Type.STRING }
+                    }
                 },
-                required: ["name", "description", "cuisine", "cookingTime", "calories", "ingredients", "tips"]
+                required: ["name", "description", "cuisine", "cookingTime", "calories", "ingredients", "tips", "instructions"]
             }
         };
 

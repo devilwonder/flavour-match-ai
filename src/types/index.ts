@@ -6,4 +6,5 @@ export interface Recipe {
     calories: string;
     ingredients: string[];
     tips: string;
+    instructions: string[];
 }
