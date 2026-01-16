@@ -1,0 +1,5 @@
+{
+  "name": "FlavorMatch AI",
+  "description": "An intelligent food recommendation system that personalizes meal ideas based on your cravings, dietary restrictions, and ingredients on hand.",
+  "requestFramePermissions": []
+}
